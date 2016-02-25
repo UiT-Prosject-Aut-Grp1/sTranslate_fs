@@ -27,13 +27,6 @@
             ToLang = xlt.ToLang
         }
 
-    // Helper function to give the first element of a sequence, if it contains something
-    let checkHead (s : seq<'a>) =
-            if Seq.isEmpty s then
-                None
-            else 
-                Some <| Seq.head s
-
     // Database only supports translating from english for now
     let FromLanguageCode = "en"
 
@@ -41,6 +34,7 @@
     let mutable _translateColl : List<Translation> = []
 
     // Reads the entire database and copies it to memory
+    // Does not support reRead as of now
     let GetTranslations =
         use db = dbSchema.GetDataContext(Settings.ConnectionStrings.DbConnectionString)
         query {
@@ -61,11 +55,14 @@
             | null | "" -> "no"
             | _ -> toLanguageCode
 
-        
-
         // Get the database 
         if _translateColl = [] then
             _translateColl <- GetTranslations
+        
+        // Back out if criteria or property was not found in enums
+        if criteria = None || property = None then
+            fromText
+        else
             
         // Search for a valid translation
         let result = 
@@ -81,7 +78,6 @@
         match result with
             | Some x -> x.ToText
             | None -> fromText
-            
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //     GetToText function returns the translated string, if defined in the Translate table. 
@@ -96,11 +92,10 @@
             | null | "" -> "no"
             | _ -> toLanguageCode
             
-        let checkHead (s : seq<'a>) =
-            if Seq.length s > 0 then
-                Some <| Seq.head s
-            else 
-                None
+        // Back out if criteria or property was not found in enums
+        if criteria = None || property = None then
+            fromText
+        else
 
         // Open a connection to the database
         use db = dbSchema.GetDataContext(Settings.ConnectionStrings.DbConnectionString)

@@ -1,5 +1,6 @@
 ﻿module Enums
     open System
+    open Model
 
     //////////////////////////
 
@@ -7,9 +8,10 @@
     let GetEnumState myType (value : string) =
         
         // Filters a string array and finds the correct Enumeration
-        try
-            Some (Enum.GetNames(myType) |> Seq.filter (fun x -> x.ToLower() = value.ToLower()) |> Seq.head)
-        with _ -> eprintf "%s:GetEnumState: Enumeration don't contain value '%s'" (myType.ToString()) value; None
+        Enum.GetNames(myType)
+        |> Seq.filter (fun x -> x.ToLower() = value.ToLower())
+        |> checkHead
+
         //match enumName with
         //    | Some string -> enumName//(Enum.Parse(myType, enumName.Value))
         //    | None -> None

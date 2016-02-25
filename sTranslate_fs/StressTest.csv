@@ -1,11 +1,19 @@
-﻿ex1;lblSomeThing;Id;StartWith;no
+﻿grghruhrufh;eifj;qqerrds;      ;dkdokd
+ex1;lblSomeThing;Id;StartWith;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 ex2;Label;Text;EndWith;no
 wx3;String;ToolTip;Exact;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Name;Label;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Edit;lblTitle;Id;Contains;no
 service;lblTitle;Id;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Process;lblTitle;Id;Contains;no
 Processes;HtmlAnchor;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Home;HtmlAnchor;Text;Contains;no
 Services;HtmlAnchor;Text;Contains;no
 Roles;HtmlAnchor;Text;Contains;no
@@ -13,21 +21,29 @@ About;HtmlAnchor;Text;Contains;no
 We suggest the following;Label;Text;Contains;no
 Add;String;Text;Contains;no
 Service;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Processes;Title;Page;Contains;no
 View;lblTitle;Id;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Description must be entered;lblMsg;Id;Contains;no
 Name must be entered;lblMsg;Id;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 A Team with this name allready exist;lblMsg;Id;Contains;no
 Owner must be entered;lblMsg;Id;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Manager must be entered;lblMsg;Id;Contains;no
 Add Process;String;Text;Contains;no
 Add Service;String;Text;Contains;no
 Belonging to group;lblTitle;Id;Contains;no
 Core;String;Text;Contains;no
 Support;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Control;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Service with source process defined;String;ToolTip;Contains;no
 Define filter;String;ToolTip;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Service with source process undefined;String;ToolTip;Contains;no
 Attach to entity;String;Text;Contains;no
 Organizational level must be selected!;lblMsg;Id;Contains;no
@@ -40,20 +56,27 @@ Owner;String;Text;Contains;no
 Manager;String;Text;Contains;no
 Sorry, a process can only be added from Service view!;String;Text;Contains;no
 {0} must be entered ;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Invalid character in {0};String;Text;Contains;no
 Unexpected error, can not find {0} with ID={1};String;Text;Contains;no
 Role {0} must be entered;String;Text;Contains;no
 ProcessRole;String;Text;Contains;no
 ServiceRole;String;Text;Contains;no
 Area;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Select;String;Text;Contains;no
 All;String;Text;Exact;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Top Management;String;Text;Contains;no
 Process Management;String;Text;Contains;no
 Work Management;String;Text;Contains;no
 Worker;String;Text;Contains;no
 Requester;String;Text;Contains;no
 new;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 This service name allready exist!;String;Text;Contains;no
 Purpose must be entered;String;Text;Contains;no
 Service type must be selected;String;Text;Contains;no
@@ -62,12 +85,16 @@ Availability must be selected;String;Text;Contains;no
 Critical level must be selected;String;Text;Contains;no
 Purpose;String;Text;Contains;no
 Description;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 Theme;String;Text;Contains;no
 SourceProcess;String;Text;Contains;no
 OrganizationLevel;String;Text;Contains;no
 CoreProcess;String;Text;Contains;no
 ControlProcess;String;Text;Contains;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd
 SupportProcess;String;Text;Contains;no
 Show;String;Text;Contains;no
 Organization;String;Text;Contains;no
 TestText;String;Text;None;no
+grghruhrufh;eifj;qqerrds;      ;dkdokd

@@ -51,7 +51,7 @@ let main argv =
     // Call the stresstest
     let translateFunction = ToText
     let fileName = __SOURCE_DIRECTORY__ + @"\StressTest.csv"
-    let numLoops = 50
+    let numLoops = 1000
     let (searchCounter,elapsedTime,loopTimes) = StressTest translateFunction fileName numLoops
     
     // Print test results
