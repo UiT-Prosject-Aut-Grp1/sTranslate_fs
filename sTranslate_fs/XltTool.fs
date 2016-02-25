@@ -47,7 +47,8 @@
     //     If the fromText is not found, the value of fromText is returned unchanged.
     //     If _translateColl is empty, GetTranslations is called to cache the database in memory
     let ToText (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
-        if fromText.Trim() = "" then "" |> ignore
+        if fromText.Trim() = "" then ""
+        else
             
         // If toLanguageCode is not valid, sets it to default "no"
         let toLang =
@@ -84,7 +85,8 @@
     //     If the fromText is not found, the value of fromText is returned unchanged.
     //     For every call to this function, a database connection is opened and closed.
     let GetToText (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
-        if fromText.Trim() = "" then "" |> ignore
+        if fromText.Trim() = "" then ""
+        else
             
         // If toLanguageCode is not valid, sets it to default "no"
         let toLang =
@@ -117,3 +119,4 @@
             | None -> fromText
 
     ////////////////////////////////////////////////////////////////////////////////////////////
+    

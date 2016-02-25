@@ -60,6 +60,12 @@ let main argv =
     printfn "Loops: %i" numLoops
     printfn "Looptimes: %A" loopTimes
 
+    // Saves to file
+    let outFile = new StreamWriter(__SOURCE_DIRECTORY__ + @"\Logg.csv")
+    let dataFrame = loopTimes
+                    |> Seq.iter (fun y -> outFile.WriteLine(y.ToString()))
+    outFile.Close() |> ignore
+
     // Keypress to close terminal
     System.Console.ReadKey() |> ignore
 
