@@ -1,4 +1,6 @@
-﻿module XltEnums
+﻿namespace sTranslate_fs
+
+module XltEnums =
     open Enums
 
     // Defines the types

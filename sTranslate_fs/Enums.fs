@@ -1,4 +1,6 @@
-﻿module Enums
+﻿namespace sTranslate_fs
+
+module Enums =
     open System
     open Model
 

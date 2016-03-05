@@ -1,4 +1,6 @@
-﻿module XltTool
+﻿namespace sTranslate_fs
+
+module XltTool =
     open System
     open System.Data
     open System.Data.Linq

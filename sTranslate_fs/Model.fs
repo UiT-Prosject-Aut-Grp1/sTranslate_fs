@@ -1,4 +1,5 @@
-﻿module Model
+﻿namespace sTranslate_fs
+module Model =
 
     // Helper function to give the first element of a sequence, if it contains something
     let checkHead (s : seq<'a>) =

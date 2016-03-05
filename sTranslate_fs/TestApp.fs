@@ -5,8 +5,8 @@ open System.IO
 open System.Text
 open FSharp.Data.TypeProviders
 open Microsoft.FSharp.Linq
-open XltTool
-open XltEnums
+open sTranslate_fs.XltTool
+open sTranslate_fs.XltEnums
 
 let logFile = "D:\LOGS\sTranslate_fs_GetToText.csv"
 let testFile = "D:\LOGS\StressTest.csv"
@@ -51,7 +51,7 @@ let StressTest translateFunction fileName numLoops =
 let main argv = 
     
     // Call the stresstest
-    let translateFunction = ToText
+    let translateFunction = GetToText
     let fileName = testFile
     let numLoops = 50
     let (searchCounter,elapsedTime,loopTimes) = StressTest translateFunction fileName numLoops
