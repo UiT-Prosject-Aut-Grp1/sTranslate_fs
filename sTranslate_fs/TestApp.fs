@@ -8,6 +8,8 @@ open Microsoft.FSharp.Linq
 open XltTool
 open XltEnums
 
+let logFile = "D:\LOGS\sTranslate_fs_GetToText.csv"
+let testFile = "D:\LOGS\StressTest.csv"
 let addToList (myList:List<'a>) element = element::myList
 
 let StressTest translateFunction fileName numLoops = 
@@ -50,8 +52,8 @@ let main argv =
     
     // Call the stresstest
     let translateFunction = ToText
-    let fileName = __SOURCE_DIRECTORY__ + @"\StressTest.csv"
-    let numLoops = 1000
+    let fileName = testFile
+    let numLoops = 50
     let (searchCounter,elapsedTime,loopTimes) = StressTest translateFunction fileName numLoops
     
     // Print test results
@@ -61,7 +63,7 @@ let main argv =
     printfn "Looptimes: %A" loopTimes
 
     // Saves to file
-    let outFile = new StreamWriter(__SOURCE_DIRECTORY__ + @"\Logg.csv")
+    let outFile = new StreamWriter(logFile)
     let dataFrame = loopTimes
                     |> Seq.iter (fun y -> outFile.WriteLine(y.ToString()))
     outFile.Close() |> ignore
