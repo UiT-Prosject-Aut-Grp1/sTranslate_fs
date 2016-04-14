@@ -1,9 +1,8 @@
 ﻿namespace sTranslate_fs
 
 module XltEnums =
-    open Enums
+    open System
 
-    // Defines the types
     type PropertyTypes = 
         | Id      = 1 
         | Text    = 2
@@ -16,6 +15,21 @@ module XltEnums =
         | EndWith   = 3
         | Contains  = 4
 
+    // Helper function to give the first element of a sequence, if it contains something
+    let checkHead (s : seq<'a>) =
+        if Seq.isEmpty s then
+            None
+        else 
+            Some <| Seq.head s
+
+    // Get enumeration state
+    let GetEnumState myType (value : string) =
+        
+        // Filters a string array and finds the correct Enumeration
+        Enum.GetNames(myType)
+        |> Seq.filter (fun x -> x.ToLower() = value.ToLower())
+        |> checkHead
+
     // Creates an object of type PropertyType from the input string
     let ToPropertyType value = 
         GetEnumState typeof<PropertyTypes> value
@@ -23,4 +37,3 @@ module XltEnums =
     // Creates an object of type Criterias from the input string
     let ToCriteria value =
         GetEnumState typeof<Criterias> value
-    

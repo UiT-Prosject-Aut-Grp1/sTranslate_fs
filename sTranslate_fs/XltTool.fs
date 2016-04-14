@@ -8,7 +8,6 @@ module XltTool =
     open Microsoft.FSharp.Linq
     open FSharp.Configuration
     open XltEnums
-    open Model
 
     // Get typed access to App.config to fetch the connection string later
     type Settings = AppSettings<"App.config">
@@ -16,9 +15,20 @@ module XltTool =
     // SQL Type Provider. Give it a dummy connection string to satisfy the compiler.
     type dbSchema = SqlDataConnection<ConnectionStringName = "dbConnectionString">
 
+    // Record type so that we can cache the database to memory and not have the data context go out of scope
+    type Translation = {
+            Id : int
+            FromText : string
+            ToText : string
+            Context : string
+            Property : string
+            Criteria : string
+            FromLang : string
+            ToLang : string
+        }
+
     // Copy the contents of a database row into a record type
-    let toTranslation (xlt : dbSchema.ServiceTypes.Translation) =
-        {
+    let toTranslation (xlt : dbSchema.ServiceTypes.Translation) = {
             Id = xlt.Id
             FromText = xlt.FromText
             ToText = xlt.ToText
@@ -35,25 +45,25 @@ module XltTool =
     // The cached version of the database
     let mutable _translateColl : List<Translation> = []
 
-    // Reads the entire database and copies it to memory
-    // Does not support reRead as of now
+    // Copies the database to memory
     let GetTranslations =
         use db = dbSchema.GetDataContext(Settings.ConnectionStrings.DbConnectionString)
         query {
             for row in db.Translation do 
                 select row
         } |> Seq.toList |> List.map toTranslation 
-    
+
     let GetCachedCollection =
         if _translateColl = [] then
             _translateColl <- GetTranslations
         _translateColl
 
     let FindTranslation collectionFunction (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
+        // If fromtext does not contain a word, return an empty string
         if fromText.Trim() = "" then
             ""
         else
-            // Back out if criteria or property was not found in enums
+            // If criteria or property was not found in enums, return the original string
             if criteria = None || property = None then
                 fromText
             else

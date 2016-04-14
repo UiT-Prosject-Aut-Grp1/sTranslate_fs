@@ -55,8 +55,6 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Model.fs" />
-    <Compile Include="Enums.fs" />
     <Compile Include="XltEnums.fs" />
     <Compile Include="XltTool.fs" />
     <None Include="App.config" />
