@@ -50,10 +50,7 @@ module XltTool =
                 select row
         } |> Seq.toList |> List.map toTranslation
 
-    //////////////////////////////////////////////////////////////////////////////////////////////
-    //     GetToText function returns the translated string, if defined in the Translate table. 
-    //     If the fromText is not found, the value of fromText is returned unchanged.
-    let GetToText (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
+    let FindTranslation collectionFunction (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
         // If fromtext does not contain a word, return an empty string
         match fromText.Trim() with
         | "" -> ""
@@ -72,7 +69,7 @@ module XltTool =
 
                 // Search for a valid translation
                 let result =
-                    GetTranslations
+                    collectionFunction
                     |> List.tryFind ( fun row -> 
                         row.Criteria.ToLower() = criteria.ToLower() &&
                         row.FromLang = FromLanguageCode &&
@@ -84,3 +81,9 @@ module XltTool =
                 match result with
                     | Some x -> x.ToText
                     | None -> fromText
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //     GetToText function returns the translated string, if defined in the Translate table. 
+    //     If the fromText is not found, the value of fromText is returned unchanged.
+    let GetToText (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
+        FindTranslation GetTranslations criteria fromText property context toLanguageCode
