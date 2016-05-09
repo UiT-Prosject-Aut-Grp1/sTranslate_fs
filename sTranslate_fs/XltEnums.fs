@@ -8,7 +8,7 @@ module XltEnums =
         | Text    = 2
         | ToolTip = 3
         | Page    = 4
-    type Criterias =
+    type CriteriaTypes =
         | None      = 0
         | Exact     = 1
         | StartWith = 2
@@ -17,13 +17,12 @@ module XltEnums =
 
     // Helper function to give the first element of a sequence, if it contains something
     let checkHead (s : seq<'a>) =
-        if Seq.isEmpty s then
-            None
-        else 
-            Some <| Seq.head s
+        match Seq.isEmpty s with
+        | true -> None
+        | false -> Some <| Seq.head s
 
     // Get enumeration state
-    let GetEnumState myType (value : string) =
+    let getEnumState myType (value : string) =
         
         // Filters a string array and finds the correct Enumeration
         Enum.GetNames(myType)
@@ -31,9 +30,9 @@ module XltEnums =
         |> checkHead
 
     // Creates an object of type PropertyType from the input string
-    let ToPropertyType value = 
-        GetEnumState typeof<PropertyTypes> value
+    let toProperty value = 
+        getEnumState typeof<PropertyTypes> value
 
     // Creates an object of type Criterias from the input string
-    let ToCriteria value =
-        GetEnumState typeof<Criterias> value
+    let toCriteria value =
+        getEnumState typeof<CriteriaTypes> value

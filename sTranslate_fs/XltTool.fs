@@ -42,65 +42,48 @@ module XltTool =
     // Database only supports translating from english for now
     let FromLanguageCode = "en"
 
-    // The cached version of the database
-    let mutable _translateColl : List<Translation> = []
-
     // Copies the database to memory
     let GetTranslations =
         use db = dbSchema.GetDataContext(Settings.ConnectionStrings.DbConnectionString)
         query {
             for row in db.Translation do 
                 select row
-        } |> Seq.toList |> List.map toTranslation 
-
-    let GetCachedCollection =
-        if _translateColl = [] then
-            _translateColl <- GetTranslations
-        _translateColl
+        } |> Seq.toList |> List.map toTranslation
 
     let FindTranslation collectionFunction (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
         // If fromtext does not contain a word, return an empty string
-        if fromText.Trim() = "" then
-            ""
-        else
+        match fromText.Trim() with
+        | "" -> ""
+        | _ ->
+
             // If criteria or property was not found in enums, return the original string
-            if criteria = None || property = None then
-                fromText
-            else
+            match criteria, property with
+            | None,_ | _,None -> fromText
+            | Some criteria, Some property ->
+            
                 // If toLanguageCode is not valid, sets it to default "no"
                 let toLang =
                     match toLanguageCode with
                     | null | "" -> "no"
                     | _ -> toLanguageCode
 
-                // Get the database 
-                let collection = collectionFunction
-                
                 // Search for a valid translation
                 let result =
-                    collection
-                    |> Seq.filter (fun row -> row.Criteria.ToLower() = criteria.Value.ToLower())
-                    |> Seq.filter (fun row -> row.FromLang = FromLanguageCode)
-                    |> Seq.filter (fun row -> row.FromText = fromText)
-                    |> Seq.filter (fun row -> row.Property.ToLower() = property.Value.ToLower())
-                    |> Seq.filter (fun row -> row.Context.ToLower() = context.ToLower())
-                    |> Seq.filter (fun row -> row.ToLang = toLang)
-                    |> checkHead
+                    collectionFunction
+                    |> List.tryFind ( fun row -> 
+                        row.Criteria.ToLower() = criteria.ToLower() &&
+                        row.FromLang = FromLanguageCode &&
+                        row.FromText = fromText &&
+                        row.Property.ToLower() = property.ToLower() &&
+                        row.Context.ToLower() = context.ToLower() &&
+                        row.ToLang = toLang )
 
                 match result with
                     | Some x -> x.ToText
                     | None -> fromText
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    //     ToText function returns the translated string, if defined in the Translate table. 
-    //     If the fromText is not found, the value of fromText is returned unchanged.
-    //     If _translateColl is empty, GetTranslations is called to cache the database in memory
-    let ToText (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
-        FindTranslation GetCachedCollection criteria fromText property context toLanguageCode
-    
     //////////////////////////////////////////////////////////////////////////////////////////////
     //     GetToText function returns the translated string, if defined in the Translate table. 
     //     If the fromText is not found, the value of fromText is returned unchanged.
-    //     For every call to this function, a database connection is opened and closed.
     let GetToText (criteria : Option<string>) (fromText : string) (property : Option<string>) (context : string) toLanguageCode =
         FindTranslation GetTranslations criteria fromText property context toLanguageCode
